@@ -14,8 +14,20 @@ startBtn.addEventListener('click', () => {
     const minutes = parseInt(minutesInput.value) || 0;
     const seconds = parseInt(secondsInput.value) || 0;
 
+    // Check for negative values and correct them
+    if (hours < 0 || minutes < 0 || seconds < 0) {
+        alert('Please enter valid non-negative time values.');
+        return;
+    }
+
     // Convert total time to seconds
     let countdown = (hours * 3600) + (minutes * 60) + seconds;
+
+    // If no time is entered, return early
+    if (countdown <= 0) {
+        alert('Please enter a valid time greater than 0.');
+        return;
+    }
 
     // Clear any existing interval if the button is pressed again
     clearInterval(timerInterval);
