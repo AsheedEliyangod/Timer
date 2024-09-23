@@ -33,6 +33,9 @@ startBtn.addEventListener('click', () => {
     clearInterval(timerInterval);
     beepPlayed = false; // Reset the beep flag when the timer starts
 
+    // Load the beep sound (to ensure it's ready to play)
+    beepSound.load();
+
     // Start the countdown timer
     timerInterval = setInterval(() => {
         // Update the timer text
@@ -40,13 +43,15 @@ startBtn.addEventListener('click', () => {
 
         // Play beep sound once at 10 seconds remaining
         if (countdown === 10 && !beepPlayed) {
-            beepSound.play();
-            beepPlayed = true; // Ensure beep plays only once at 10 seconds
+            beepSound.currentTime = 0; // Rewind the sound to the start
+            beepSound.play();          // Play the beep sound
+            beepPlayed = true;         // Ensure beep plays only once at 10 seconds
         }
 
         // Play beep when the countdown reaches 0
         if (countdown === 0) {
-            beepSound.play(); // Play final beep at 0 seconds
+            beepSound.currentTime = 0; // Rewind the sound to the start
+            beepSound.play();          // Play final beep at 0 seconds
             clearInterval(timerInterval); // Stop the timer
         }
 
