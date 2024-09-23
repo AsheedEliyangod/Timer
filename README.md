@@ -16,7 +16,7 @@ Built by the *master of time* himself, **[Asheed EliyanGOD](https://github.com/A
 
 ## Try It Live
 
-Want to experience the thrill of time-keeping? Check out the live version here: **[Stopwatch Timer Live](https://AsheedEliyangod.github.io/timer)**.  
+Want to experience the thrill of time-keeping? Check out the live version here: **[Stopwatch Timer Live](https://asheedeliyangod.github.io/Timer/)**.  
 
 ## How to Use This Masterpiece
 
