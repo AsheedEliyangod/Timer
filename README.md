@@ -16,13 +16,13 @@ Built by the *master of time* himself, **[Asheed EliyanGOD](https://github.com/A
 
 ## Try It Live
 
-Want to experience the thrill of time-keeping? Check out the live version here: **[Stopwatch Timer Live](https://akshay-k-a-dev.github.io/timer/)**.  
+Want to experience the thrill of time-keeping? Check out the live version here: **[Stopwatch Timer Live](https://AsheedEliyangod.github.io/timer)**.  
 
 ## How to Use This Masterpiece
 
 1. **Clone the repo**:  
    ```
-   git clone https://github.com/akshay-k-a-dev/timer/
+   git clone https://github.com/AsheedEliyangod/Timer/
    ```
 
 2. **Open `index.html`**:  
