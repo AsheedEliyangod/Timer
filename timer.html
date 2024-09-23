@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Timer with Video Background</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .input-container {
+            display: flex;
+            align-items: center; /* Align items vertically in the center */
+            gap: 15px; /* Space between each input and label */
+        }
+        label {
+            margin-right: 5px; /* Space between label and input */
+        }
+        input {
+            width: 60px; /* Fixed width for input fields */
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay muted loop id="background-video">
+            <source src="video.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        <div class="content">
+            <h1 id="timer">00:00:00</h1>
+            <div class="input-container">
+                <label for="hoursInput">Hour:</label>
+                <input type="number" id="hoursInput" min="0" placeholder="0">
+                
+                <label for="minutesInput">Min:</label>
+                <input type="number" id="minutesInput" min="0" max="59" placeholder="0">
+                
+                <label for="secondsInput">Sec:</label>
+                <input type="number" id="secondsInput" min="0" max="59" placeholder="0">
+                
+                <button id="startBtn">Start Timer</button>
+                <button id="resetBtn">Reset Timer</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="beep-sound" src="beep.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
