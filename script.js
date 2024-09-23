@@ -4,30 +4,32 @@ const startBtn = document.getElementById('startBtn');
 const resetBtn = document.getElementById('resetBtn');
 const timeInput = document.getElementById('timeInput');
 
-let timerInterval; // Variable to store the interval
-let beepPlayed = false; // Flag to ensure beep is played only once at 10 seconds
+let timerInterval;
+let beepPlayed = false;
 
 startBtn.addEventListener('click', () => {
-    let countdown = parseInt(timeInput.value) || 60; // Get user input or default to 60 seconds
+    let countdown = parseInt(timeInput.value) || 60; // Default to 60 seconds if input is invalid
 
-    // Clear any existing interval if the button is pressed again
+    // Clear any previous interval to avoid multiple timers running
     clearInterval(timerInterval);
-    beepPlayed = false; // Reset the beep flag when the timer starts
+    beepPlayed = false;
 
-    // Start the countdown timer
+    // Adjust the font size based on the screen width (for responsiveness)
+    adjustFontSize();
+
+    // Start the countdown
     timerInterval = setInterval(() => {
-        // Update the timer text
         timerElement.innerText = formatTime(countdown);
 
-        // Play beep sound once at 10 seconds remaining
+        // Play the beep sound when 10 seconds remain
         if (countdown === 10 && !beepPlayed) {
             beepSound.play();
-            beepPlayed = true; // Ensure beep plays only once
+            beepPlayed = true;
         }
 
-        // When the countdown reaches 0, stop the timer
+        // Stop the timer when it reaches 0
         if (countdown === 0) {
-            clearInterval(timerInterval); // Stop the timer
+            clearInterval(timerInterval);
         }
 
         // Decrement the countdown value
@@ -37,17 +39,43 @@ startBtn.addEventListener('click', () => {
     }, 1000);
 });
 
-// Add functionality for the reset button
 resetBtn.addEventListener('click', () => {
-    clearInterval(timerInterval); // Stop the timer
+    clearInterval(timerInterval);
     timerElement.innerText = '00:00'; // Reset the timer display
     timeInput.value = ''; // Clear the input field
-    beepPlayed = false; // Reset beep flag
+    beepPlayed = false;
 });
 
-// Format the time to MM:SS format
+// Format seconds to MM:SS format
 function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
+
+// Adjust font size for responsiveness
+function adjustFontSize() {
+    const screenWidth = window.innerWidth;
+    if (screenWidth <= 600) {
+        timerElement.style.fontSize = '36px';
+        startBtn.style.padding = '8px 16px';
+        startBtn.style.fontSize = '14px';
+        resetBtn.style.padding = '8px 16px';
+        resetBtn.style.fontSize = '14px';
+        timeInput.style.fontSize = '14px';
+        timeInput.style.width = '60px';
+        timeInput.style.padding = '8px';
+    } else {
+        timerElement.style.fontSize = '48px';
+        startBtn.style.padding = '10px 20px';
+        startBtn.style.fontSize = '16px';
+        resetBtn.style.padding = '10px 20px';
+        resetBtn.style.fontSize = '16px';
+        timeInput.style.fontSize = '16px';
+        timeInput.style.width = '80px';
+        timeInput.style.padding = '10px';
+    }
+}
+
+// Run font size adjustment on window resize
+window.addEventListener('resize', adjustFontSize);
