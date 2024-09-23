@@ -7,27 +7,34 @@ const timeInput = document.getElementById('timeInput');
 let timerInterval;
 let beepPlayed = false;
 
-startBtn.addEventListener('click', () => {
-    let countdown = parseInt(timeInput.value) || 60; // Default to 60 seconds if input is invalid
+// Update timer display when user enters the time
+timeInput.addEventListener('input', () => {
+    const timeValue = parseInt(timeInput.value) || 0;
+    timerElement.innerText = formatTime(timeValue);
+});
 
-    // Clear any previous interval to avoid multiple timers running
+// Start countdown on button click
+startBtn.addEventListener('click', () => {
+    let countdown = parseInt(timeInput.value) || 60; // Default to 60 seconds if no input
+
+    // Clear any previous interval
     clearInterval(timerInterval);
     beepPlayed = false;
 
-    // Adjust the font size based on the screen width (for responsiveness)
-    adjustFontSize();
+    // Adjust styles based on screen size
+    adjustStylesForScreenSize();
 
     // Start the countdown
     timerInterval = setInterval(() => {
         timerElement.innerText = formatTime(countdown);
 
-        // Play the beep sound when 10 seconds remain
+        // Play the beep sound at 10 seconds remaining
         if (countdown === 10 && !beepPlayed) {
             beepSound.play();
             beepPlayed = true;
         }
 
-        // Stop the timer when it reaches 0
+        // Stop the timer when countdown reaches 0
         if (countdown === 0) {
             clearInterval(timerInterval);
         }
@@ -39,22 +46,23 @@ startBtn.addEventListener('click', () => {
     }, 1000);
 });
 
+// Reset timer and input on button click
 resetBtn.addEventListener('click', () => {
     clearInterval(timerInterval);
-    timerElement.innerText = '00:00'; // Reset the timer display
-    timeInput.value = ''; // Clear the input field
+    timerElement.innerText = '00:00'; // Reset display
+    timeInput.value = ''; // Clear input field
     beepPlayed = false;
 });
 
-// Format seconds to MM:SS format
+// Format time in MM:SS format
 function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
 
-// Adjust font size for responsiveness
-function adjustFontSize() {
+// Adjust styles based on screen width for responsiveness
+function adjustStylesForScreenSize() {
     const screenWidth = window.innerWidth;
     if (screenWidth <= 600) {
         timerElement.style.fontSize = '36px';
@@ -77,5 +85,5 @@ function adjustFontSize() {
     }
 }
 
-// Run font size adjustment on window resize
-window.addEventListener('resize', adjustFontSize);
+// Adjust styles whenever the window is resized
+window.addEventListener('resize', adjustStylesForScreenSize);
